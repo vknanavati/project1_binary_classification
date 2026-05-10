@@ -23,8 +23,16 @@ Has three functions:
 
 ### `features.py`
 Takes the raw X and y from dataset.py and prepares them for the model.
-This includes scaling the numbers to a common range and splitting the data
-into a training set and a test set.
+
+This includes **scaling the numbers** to a common range (0-1) using StandardScaler and **splitting the data** into a training set and a test set.
+
+The problem is that most ML models are sensitive to the size of numbers. If you feed it these raw numbers, the model might pay way more attention to chol (which has big numbers like 500) than to fbs (which is just 0 or 1), not because cholesterol is more important but simply because its numbers are bigger.
+Scaling fixes this by transforming every column so it lives in the same range. The most common method is called StandardScaler, which transforms each column so that:
+
+The average becomes 0
+Most values fall between -3 and 3
+
+So after scaling, cholesterol of 250 might become 0.3, and an age of 63 might become 1.2. The actual values don't matter anymore — what matters is where each value sits relative to the rest of its column.
 
 ---
 
