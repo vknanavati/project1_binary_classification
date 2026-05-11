@@ -45,14 +45,22 @@ This is the file where the model actually learns — it takes the prepared data 
 
 **Logistic Regression's** job during training is to find the best weights for each feature so the scoring system is as accurate as possible.
 
-The limitation: it can only draw one straight dividing line through the data. If the real pattern is more complicated and curvy, it struggles.
+Each feature gets multiplied by a **weight** - a number that represents how important that feature is. A high weight means that feature matters a lot. A negative weight means higher values actually push toward "no heart disease."
+
+You add all those weighted values together and get one final score.
+
+If the score is above 0.5 → predict heart disease.
+Below 0.5 → predict no heart disease.
+
+Logistic Regression's job during training is to find the best weights for each feature so the scoring system is as accurate as possible.
 
 Imagine you're a doctor and you have data on 242 patients. You want to figure out a simple rule to predict heart disease. You notice that older patients with high cholesterol tend to have it more. So you come up with a scoring system:
 
 score = (age × some weight) + (cholesterol × some weight) + (heart rate × some weight) + ...
 
-Each feature gets multiplied by a weight — a number that represents how important that feature is. A high weight means that feature matters a lot. A negative weight means higher values actually push toward "no heart disease."
-You add all those weighted values together and get one final score. If the score is above 0.5 → predict heart disease. Below 0.5 → predict no heart disease.
+
+The limitation: it can only draw one straight dividing line through the data. If the real pattern is more complicated and curvy, it struggles.
+
 
 **Random Forests** Now imagine instead of one scoring formula, you ask 100 different doctors for their opinion — and each doctor asks a series of yes/no questions to reach their answer:
 Doctor 1:
