@@ -41,6 +41,35 @@ Builds the ML model, feeds it the training data, and lets it learn the patterns.
 Saves the trained model to disk as a .pkl file using joblib so we don't have
 to retrain every time.
 
+This is the file where the model actually learns — it takes the prepared data from features.py and trains two different models on it so we can compare them. We're trying two models intentionally: **Logistic Regression** and **Random Forest**.
+
+**Logistic Regression's** job during training is to find the best weights for each feature so the scoring system is as accurate as possible.
+
+The limitation: it can only draw one straight dividing line through the data. If the real pattern is more complicated and curvy, it struggles.
+
+Imagine you're a doctor and you have data on 242 patients. You want to figure out a simple rule to predict heart disease. You notice that older patients with high cholesterol tend to have it more. So you come up with a scoring system:
+
+score = (age × some weight) + (cholesterol × some weight) + (heart rate × some weight) + ...
+
+Each feature gets multiplied by a weight — a number that represents how important that feature is. A high weight means that feature matters a lot. A negative weight means higher values actually push toward "no heart disease."
+You add all those weighted values together and get one final score. If the score is above 0.5 → predict heart disease. Below 0.5 → predict no heart disease.
+
+**Random Forests** Now imagine instead of one scoring formula, you ask 100 different doctors for their opinion — and each doctor asks a series of yes/no questions to reach their answer:
+Doctor 1:
+Is age over 55?
+  YES → Is chest pain type 3?
+    YES → Heart disease
+    NO  → No heart disease
+  NO → Is cholesterol over 240?
+    YES → Heart disease
+    NO  → No heart disease
+
+Each doctor is a decision tree — a flowchart of yes/no questions. Each of the 100 doctors was trained on a slightly different random sample of patients, so they all learned slightly different question patterns.
+
+When a new patient comes in, all 100 doctors make their prediction. If 67 say heart disease and 33 say no — the final answer is heart disease. Majority vote wins.
+
+Why is this better than one doctor? Because one doctor might have learned some quirky pattern that doesn't generalize. But when 100 doctors all agree, you can be more confident.
+
 ---
 
 ### `evaluate.py`
