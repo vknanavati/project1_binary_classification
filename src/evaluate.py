@@ -7,6 +7,7 @@ from sklearn.metrics import (
     confusion_matrix     # a grid showing exactly where the model got things right and wrong
 )
 
+import os
 import joblib
 import numpy as np
 import matplotlib.pyplot as plt
@@ -81,8 +82,8 @@ def plot_confusion_matrix(y_test, y_pred, model_name):
     plt.ylabel('Actual')
     plt.xlabel('Predicted')
     plt.tight_layout()
-    plt.savefig(f'models/{model_name}_confusion_matrix.png')
-    print(f"Confusion matrix saved to models/{model_name}_confusion_matrix.png")
+    plt.savefig(os.path.join(config.MODEL_DIR, f'{model_name}_confusion_matrix.png'))
+    print(f"Confusion matrix saved to {os.path.join(config.MODEL_DIR, f'{model_name}_confusion_matrix.png')}")
     plt.close()
 
 
@@ -108,8 +109,8 @@ def plot_feature_importance(model, model_name):
     plt.title(f'Feature Importance — {model_name}')
     plt.xlabel('Importance')
     plt.tight_layout()
-    plt.savefig(f'models/{model_name}_feature_importance.png')
-    print(f"Feature importance saved to models/{model_name}_feature_importance.png")
+    plt.savefig(os.path.join(config.MODEL_DIR, f'{model_name}_feature_importance.png'))
+    print(f"Feature importance saved to {os.path.join(config.MODEL_DIR, f'{model_name}_feature_importance.png')}")
     plt.close()
 
 
